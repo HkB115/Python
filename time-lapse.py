@@ -12,9 +12,11 @@ try:
 except:
  try:
   import wiringpi
+ except:
+  wiringpi_installed=False
 try:
  wiringpi.wiringPiSetup()
- wiringpi=True
+ wiringpi_installed=True
 except:
  print("[WARN] WiringPi is required for LED functionality.")
 
@@ -27,27 +29,7 @@ fps_in=10
 fps_out=24
 ####################
 
-##### Camera Settings #####
-camera.resolution=(1280,720)
-camera.brightness=50
-camera.contrast=0
-camera.saturation=0
-camera.sharpness=0
-camera.ISO=800
-camera.video_stabilization=False
-camera.exposure_compensation=0
-camera.exposure_mode='auto'
-camera.meter_mode='average'
-camera.awb_mode='auto'
-camera.image_effect='none'
-camera.color_effects=None
-camera.hflip=False
-camera.vflip=False
-camera.rotation=0
-camera.crop=(0.0, 0.0, 1.0, 1.0)
-###########################
-
-if(wiringpi!=True):
+if(not(wiringpi_installed)):
  led_array=False
 if(led_array):
  if(led_color=='red'):
@@ -72,11 +54,11 @@ while frames<frames_max:
   pin(led_pin,0)
  YMD=datetime.date.today()
  ymd=YMD.isoformat()
- #hour = datetime.now().hour
- #minute = datetime.now().minute
- #second = datetime.now().second
  frame_num=str(frames).zfill(7)
  with camera as picamera.PiCamera:
+  camera.resolution=(1280,720)
+  camera.brightness=50
+  camera.ISO=800
   camera.capture("frame%s.jpg"%(frame_num))
   #os.system("raspistill -o frame%s.jpg"%(frame_num))
  frames+=1
