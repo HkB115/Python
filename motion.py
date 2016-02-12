@@ -27,7 +27,6 @@ pin_blue=3
 wiringpi.pinMode(pin_red, wiringpi.GPIO.OUTPUT)
 wiringpi.pinMode(pin_green, wiringpi.GPIO.OUTPUT)
 wiringpi.pinMode(pin_blue, wiringpi.GPIO.OUTPUT)
-camera=picamera.PiCamera()
 pin=wiringpi.digitalWrite
 
 ##### Settings #####
@@ -73,7 +72,7 @@ while(scan):
     pin(pin_red,1)
    else:
     pin(pin_red,0)
-   with picamera.PiCamera() as comparator:
+   with picamera.PiCamera() as camera:
     camera.resolution=(1280,720)
     camera.brightness=50
     camera.ISO=800
