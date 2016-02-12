@@ -12,13 +12,11 @@ try:
 except:
  try:
   import wiringpi
- except:
-  print("[WARN] WiringPi is required for LED functionality.")
 try:
  wiringpi.wiringPiSetup()
+ wiringpi=True
 except:
- print("[ERROR] Program must be run as root!")
- exit(0)
+ print("[WARN] WiringPi is required for LED functionality.")
 from PIL import Image
 
 ##### Settings #####
@@ -30,6 +28,8 @@ led_color='red' # Default: 'red'. Choices: 'red', 'green', or 'blue'
 trigger_threshold=2 # Default: 2. Minimum percent change in images to trigger the camera
 ####################
 
+if(wiringpi!=True):
+ led_array=False
 if(led_array):
  if(led_color=='red'):
   led_pin=0
