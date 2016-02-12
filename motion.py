@@ -45,6 +45,7 @@ while(scan):
  stream=io.BytesIO()
  with picamera.PiCamera() as comparator:
   comparator.resolution=(64,36)
+  comparator.ISO=800
   comparator.capture(stream,format='jpeg')
  stream.seek(0)
  if(len(images)!=2):
@@ -74,6 +75,8 @@ while(scan):
     pin(pin_red,0)
    with picamera.PiCamera() as comparator:
     camera.resolution=(1280,720)
-    camera.capture(motion,format='jpeg')
+    camera.brightness=50
+    camera.ISO=800
+    camera.capture(capture00000000,format='jpeg')
    pin(pin_red,0)
   images[1]=images[0]
