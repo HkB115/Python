@@ -1,4 +1,4 @@
-# Raspberry_Pi_Python
+# Raspberry Pi Python
 Python scripts for use with the Raspberry Pi and its headers.
 
 # motion.py
