@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import os
-import datetime, time
+import io
+import datetime,time
 sleep=time.sleep
 try:
  import picamera
@@ -12,23 +13,25 @@ try:
 except:
  try:
   import wiringpi
+ except:
+  wiringpi_installed=False
 try:
  wiringpi.wiringPiSetup()
- wiringpi=True
+ wiringpi_installed=True
 except:
  print("[WARN] WiringPi is required for LED functionality.")
 from PIL import Image
 
 ##### Settings #####
 delay=5 # Default: 5. Minimum delay between camera triggers in seconds
-detection=True # Enable motion detection to run continuously
+detect=True # Enable motion detection to run continuously
 discrepancy_margin=25 # Default: 25. Allow for some differences. Useful if camera is pointed outside
 led_array=True # Enable the LEDBorg module to activate when the camera takes a picture
 led_color='red' # Default: 'red'. Choices: 'red', 'green', or 'blue'
 trigger_threshold=2 # Default: 2. Minimum percent change in images to trigger the camera
 ####################
 
-if(wiringpi!=True):
+if(not(wiringpi_installed)):
  led_array=False
 if(led_array):
  if(led_color=='red'):
@@ -58,7 +61,6 @@ while(detect):
   images[0]=Image.open(stream)
  discrepancies=0
  if(len(images)!=1):
-  images[1]=images[0]
   x=0
   while(x<images[0].size[0]):
    y=0
@@ -78,9 +80,18 @@ while(detect):
     pin(led_pin,1)
    else:
     pin(led_pin,0)
+   YMD=datetime.date.today()
+   ymd=YMD.isoformat()
+   timeinseconds=time.localtime()
+   print(timeinseconds)
+   print(int(timeinseconds))
+   #m,sec=divmod(timeinseconds,60)
+   #hour,m=divmod(m,60)
+   print("%d:%02d:%02d"%(hour,m,sec))
    with picamera.PiCamera() as camera:
     camera.resolution=(1280,720)
     camera.brightness=50
     camera.ISO=800
-    camera.capture("capture00000000",format='jpeg')
+    camera.capture("capture%s.jpg"%(ymd))
    pin(led_pin,0)
+  images[1]=images[0]
