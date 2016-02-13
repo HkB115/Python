@@ -44,6 +44,9 @@ if(led_array):
   led_pin=0
  wiringpi.pinMode(led_pin, wiringpi.GPIO.OUTPUT)
  pin=wiringpi.digitalWrite
+ pin(0,0)
+ pin(2,0)
+ pin(3,0)
 else:
  led_array=False
 
@@ -74,24 +77,18 @@ while(detect):
     y+=1
    x+=1
   trigger=(discrepancies*100)/(images[0].size[0]*images[0].size[1])
-  print(str(trigger)+"% changed.")
-  if(trigger>trigger_threshold):
+  #print(str(trigger)+"% changed.")
+  if(trigger>=trigger_threshold):
    if(led_array==True):
     pin(led_pin,1)
    else:
     pin(led_pin,0)
-   YMD=datetime.date.today()
-   ymd=YMD.isoformat()
-   timeinseconds=time.localtime()
-   print(timeinseconds)
-   print(int(timeinseconds))
-   #m,sec=divmod(timeinseconds,60)
-   #hour,m=divmod(m,60)
-   print("%d:%02d:%02d"%(hour,m,sec))
+   current_time=time.strftime("%y-%b-%dat%H:%M:%S",time.localtime())
    with picamera.PiCamera() as camera:
     camera.resolution=(1280,720)
     camera.brightness=50
     camera.ISO=800
-    camera.capture("capture%s.jpg"%(ymd))
+    camera.capture("capture%s.jpg"%(current_time))
    pin(led_pin,0)
+   #print("Camera triggered at %s"%(current_time))
   images[1]=images[0]
