@@ -1,8 +1,8 @@
 #!/usr/bin/python
-from os import system
+from os import system, name
 
 def mainmenu():
- system("cls")
+ system('cls' if name=='nt' else 'clear')
  print("1: Restart")
  print("2: Update")
  print("3: Stand there and look pretty")
