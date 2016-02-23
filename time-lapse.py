@@ -1,6 +1,6 @@
 #!/usr/bin/python
-import os
-import datetime, time
+import datetime
+from os import system
 from time import sleep
 try:
  import picamera
@@ -64,5 +64,5 @@ while frames<frames_max:
  frames+=1
  sleep(delay)
 pin(led_pin,0)
-os.system("avconv -r %s -i frame%s.jpg -r %s -vcodec libx264 -crf 20 -g 15 -vf crop=2592:1458,scale=1280:720 video.mp4"%(fps_in,'%7d',fps_out))
-os.system("rm -f frame*")
+system("avconv -r %s -i frame%s.jpg -r %s -vcodec libx264 -crf 20 -g 15 -vf crop=2592:1458,scale=1280:720 video.mp4"%(fps_in,'%7d',fps_out))
+system("rm -f frame*")
