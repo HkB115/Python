@@ -17,7 +17,7 @@ def clrdisp():
 
 def main():
  menu=True
- while(menu)
+ while(menu):
   clrdisp()
   print("####################################")
   print("#                                  #")
