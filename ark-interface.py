@@ -1,5 +1,6 @@
 #!/usr/bin/python
 from os import name,system
+import socket
 
 def clrdisp()
  system('cls' if name=='nt' else 'clear')
@@ -38,5 +39,31 @@ def main():
   else:
    clrdisp()
    print("Option not recognized!")
+
+
+def server_status():
+ clrdisp()
+ print("Code here")
+
+def restart_server():
+ clrdisp()
+ print("Code here")
+
+def start_server():
+ clrdisp()
+ print("Code here")
+
+def stop_server():
+ clrdisp()
+ print("Code here")
+
+def update_server():
+ clrdisp()
+ print("Code here")
+
+def update_script():
+ clrdisp()
+ print("Code here")
+
 
 main()
