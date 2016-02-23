@@ -1,6 +1,8 @@
 #!/usr/bin/python
+from os import system
 
 def mainmenu():
+ system("cls")
  print("1: Restart")
  print("2: Update")
  print("3: Stand there and look pretty")
@@ -22,4 +24,4 @@ elif(choice==3):
  mainmenu()
 else:
  print("Option not recognized")
- mainmenu
+ mainmenu()
