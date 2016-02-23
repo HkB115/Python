@@ -1,5 +1,5 @@
-# Raspberry Pi Python
-Python scripts for use with the Raspberry Pi and its headers.
+# Python
+Python scripts
 
 # motion.py
 Python3 script that takes a 1280x720 picture when the camera module detects movement. Also has an option to turn on a red LED when the camera detects movement.
