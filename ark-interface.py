@@ -11,6 +11,7 @@ server_port="" # Enter the port of the server through which you are connecting t
 
 ver=0.0.1 # DO NOT CHANGE THIS
 ###############################
+client_socket=socket(AF_INET,SOCK_STREAM)
 
 def clrdisp()
  system('cls' if name=='nt' else 'clear')
