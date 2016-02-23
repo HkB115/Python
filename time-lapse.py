@@ -1,7 +1,7 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 import os
 import datetime, time
-sleep=time.sleep
+from time import sleep
 try:
  import picamera
 except:
@@ -62,7 +62,7 @@ while frames<frames_max:
   camera.capture("frame%s.jpg"%(frame_num))
   #os.system("raspistill -o frame%s.jpg"%(frame_num))
  frames+=1
- time.sleep(delay)
+ sleep(delay)
 pin(led_pin,0)
 os.system("avconv -r %s -i frame%s.jpg -r %s -vcodec libx264 -crf 20 -g 15 -vf crop=2592:1458,scale=1280:720 video.mp4"%(fps_in,'%7d',fps_out))
 os.system("rm -f frame*")
