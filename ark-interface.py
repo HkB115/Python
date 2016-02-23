@@ -1,5 +1,4 @@
 #!/usr/bin/python
-from sys import argv
 print("1: Restart")
 print("2: Update")
 print("3: Stand there and look pretty")
