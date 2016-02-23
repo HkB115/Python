@@ -33,9 +33,9 @@ def main():
    update_server()
   elif(option=='6'):
    update_script()
-  elif(option=='7'):
+  elif(option=='0'):
    clrdisp()
-   exit()
+   menu=False
   else:
    clrdisp()
    print("Option not recognized!")
