@@ -1,5 +1,5 @@
 # Python
-Python scripts
+Code written in Python programming language.
 
 # motion.py
 Python script for Raspberry Pi that takes a 1280x720 picture when the camera module detects movement. Also has an option to turn on a red LED when the camera detects movement.
