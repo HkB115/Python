@@ -8,11 +8,11 @@ from time import sleep
 server_address="127.0.0.1" # Enter the IP of the server you are connecting to.
 server_port="" # Enter the port of the server through which you are connecting to. If left empty, defaults to 22.
 
-ver=0.0.1 # DO NOT CHANGE THIS
+ver='0.0.1' # DO NOT CHANGE THIS
 ###############################
 client_socket=socket(AF_INET,SOCK_STREAM)
 
-def clrdisp()
+def clrdisp():
  system('cls' if name=='nt' else 'clear')
 
 def main():
