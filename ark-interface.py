@@ -1,6 +1,14 @@
 #!/usr/bin/python
 from os import name,system
 import socket
+from time import sleep
+
+######## Configuration ########
+server_address="127.0.0.1" # Enter the IP of the server you are connecting to.
+server_port="" # Enter the port of the server through which you are connecting to. If left empty, defaults to 22.
+
+ver=0.0.1 # DO NOT CHANGE THIS
+###############################
 
 def clrdisp()
  system('cls' if name=='nt' else 'clear')
@@ -21,6 +29,7 @@ def main():
   print("#                                  #")
   print("####################################")
   option=input("Select an option: ")
+  clrdisp()
   if(option=='1')
    server_status()
   elif(option=='2'):
@@ -34,36 +43,29 @@ def main():
   elif(option=='6'):
    update_script()
   elif(option=='0'):
-   clrdisp()
    menu=False
   else:
-   clrdisp()
    print("Option not recognized!")
-
+   sleep(3)
 
 def server_status():
- clrdisp()
  print("Code here")
 
 def restart_server():
- clrdisp()
  print("Code here")
 
 def start_server():
- clrdisp()
  print("Code here")
 
 def stop_server():
- clrdisp()
  print("Code here")
 
 def update_server():
- clrdisp()
  print("Code here")
 
 def update_script():
- clrdisp()
  print("Code here")
+
 
 
 main()
