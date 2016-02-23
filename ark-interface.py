@@ -1,4 +1,6 @@
 #!/usr/bin/python
+## Created by HkB115
+## Feel free to use this code
 from os import name,system
 import socket
 from time import sleep
