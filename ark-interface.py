@@ -32,7 +32,7 @@ def main():
   print("####################################")
   option=input("Select an option: ")
   clrdisp()
-  if(option=='1')
+  if(option=='1'):
    server_status()
   elif(option=='2'):
    restart_server()
