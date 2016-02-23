@@ -1,58 +1,64 @@
 #!/usr/bin/python
 ## Created by HkB115
+ver='0.0.1' # DO NOT CHANGE THIS
 from os import name,system
 import socket
 from time import sleep
 
 ######## Configuration ########
-server_address="127.0.0.1" # Enter the IP of the server you are connecting to.
-server_port="" # Enter the port of the server through which you are connecting to. If left empty, defaults to 22.
+server_address='127.0.0.1' # Enter the IP of the server you are connecting to.
+server_port='' # Enter the port of the server through which you are connecting to. If left empty, defaults to 8888.
 
-ver='0.0.1' # DO NOT CHANGE THIS
+
 ###############################
-client_socket=socket(AF_INET,SOCK_STREAM)
+client_socket=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+if(server_port==''):
+ server_port=8888
 
 def clrdisp():
  system('cls' if name=='nt' else 'clear')
 
 def main():
- menu=True
- while(menu):
+ menu={}
+ menu[0]="####################################"
+ menu[1]="Get server status"
+ menu[2]="Restart server"
+ menu[3]="Start server"
+ menu[4]="Stop server"
+ menu[5]="Update server"
+ menu[6]="Update this script"
+ menu[7]="Exit"
+ menu[9]="####################################"
+ while(True):
   clrdisp()
-  print("####################################")
-  print("#                                  #")
-  print("# 1: Get server status             #")
-  print("# 2: Restart server                #")
-  print("# 3: Start server                  #")
-  print("# 4: Stop server                   #")
-  print("# 5: Update server                 #")
-  print("# 6: Update this script.           #")
-  print("# 0: Exit.                         #")
-  print("#                                  #")
-  print("####################################")
-  option=input("Select an option: ")
+  for entry in menu:
+   if(entry==0 or entry==9):
+    print(str(menu[entry]))
+   else:
+    print("#",str(entry),menu[entry])
+  selection=input("Select an option: ")
   clrdisp()
-  if(option=='1'):
+  if(selection=='1'):
    server_status()
-  elif(option=='2'):
+  elif(selection=='2'):
    restart_server()
-  elif(option=='3'):
+  elif(selection=='3'):
    start_server()
-  elif(option=='4'):
+  elif(selection=='4'):
    stop_server()
-  elif(option=='5'):
+  elif(selection=='5'):
    update_server()
-  elif(option=='6'):
+  elif(selection=='6'):
    update_script()
-  elif(option=='0'):
-   menu=False
+  elif(selection=='7'):
+   break
   else:
    print("Option not recognized!")
    sleep(3)
 
 def server_status():
  print("Code here")
- create_connection(server_address,30)
+ socket.create_connection(server_address,30)
 
 def restart_server():
  print("Code here")
