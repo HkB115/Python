@@ -50,6 +50,7 @@ def main():
 
 def server_status():
  print("Code here")
+ create_connection(server_address,30)
 
 def restart_server():
  print("Code here")
