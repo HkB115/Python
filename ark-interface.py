@@ -1,11 +1,18 @@
 #!/usr/bin/python
 from os import name,system
 
-def mainmenu():
+def clrdisp()
  system('cls' if name=='nt' else 'clear')
- print("1: Restart")
- print("2: Update Server")
- print("3: Stand there and look pretty")
+
+def mainmenu():
+ clrdisp()
+ print("###################################")
+ print("#                                 #")
+ print("# 1: Restart                      #")
+ print("# 2: Update server                #")
+ print("# 3: Update this script           #")
+ print("#                                 #")
+ print("###################################")
  choice=input("What would you like to do?")
 
 if(choice==1):
