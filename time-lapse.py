@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import datetime
+from datetime import date
 from os import system
 from time import sleep
 try:
@@ -52,7 +52,7 @@ while frames<frames_max:
   pin(led_pin,1)
  else:
   pin(led_pin,0)
- YMD=datetime.date.today()
+ YMD=date.today()
  ymd=YMD.isoformat()
  frame_num=str(frames).zfill(7)
  with camera as picamera.PiCamera:
