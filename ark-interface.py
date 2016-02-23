@@ -1,10 +1,10 @@
 #!/usr/bin/python
-from os import system, name
+from os import name,system
 
 def mainmenu():
  system('cls' if name=='nt' else 'clear')
  print("1: Restart")
- print("2: Update")
+ print("2: Update Server")
  print("3: Stand there and look pretty")
  choice=input("What would you like to do?")
 
@@ -12,9 +12,9 @@ if(choice==1):
  while(restart=='d'):
   restart=input("Are you sure you want to restart? y/n")
   if(restart=='y'):
-    restart()
+   restart()
   elif(restart=='n'):
-    mainmenu()
+   mainmenu()
   else
    restart='d'
   print("Please enter y or n")
