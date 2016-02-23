@@ -19,11 +19,22 @@ def main():
   print("# 0: Exit.                         #")
   print("#                                  #")
   print("####################################")
-  choice=input("Choose:")
-  elif(choice==2):
-   update()
-  elif(choice==3):
-   mainmenu()
+  option=input("Select an option: ")
+  if(option=='1')
+   server_status()
+  elif(option=='2'):
+   restart_server()
+  elif(option=='3'):
+   start_server()
+  elif(option=='4'):
+   stop_server()
+  elif(option=='5'):
+   update_server()
+  elif(option=='6'):
+   update_script()
+  elif(option=='7'):
+   clrdisp()
+   exit()
   else:
    clrdisp()
    print("Option not recognized!")
