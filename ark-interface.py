@@ -138,7 +138,6 @@ while(connected != True):
   print("Listen here, you little shit!")
   connection,server_address = sock.accept()
   sock.send('Ping! Shut up and take my key!')
-  print("Send failedQ")
   recv = connection.recv(16)
   print("tried to receive!")
   if(recv == 'Pong! Nice key! I have one just like it!'):
