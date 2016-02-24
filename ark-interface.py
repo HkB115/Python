@@ -131,11 +131,13 @@ except:
  print("Connection failed!")
  sleep(3)
  exit()
+connection,client_address = sock.accept()
 connecting = True
 tries = 0
 while(connecting):
- sock.send('Ping!')
- recv = connection.recv(16)
+ try:
+  sock.send('Ping!')
+  recv = sock.recv(16)
  if(recv == 'Pong!'):
   connected = False
  else:
