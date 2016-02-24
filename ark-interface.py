@@ -12,8 +12,8 @@ server_port = 8888 # Enter the port of the server through which you are connecti
 
 ###############################
 
-if(server_address == '' or server_address == 'localhost'):
- server_address = '127.0.0.1'
+if(server_ip == '' or server_ip == 'localhost'):
+ server_ip = '127.0.0.1'
 
 try:
  server_port = int(server_port)
