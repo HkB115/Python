@@ -115,6 +115,6 @@ python3 = version_info[0] > 2 # Python 3 check
 if(server_port == ''):
  server_port = 8888
 sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-sock.bind((server_address,int(server_port)))
+sock.bind(server_address,int(server_port))
 sock.listen(1)
 main()
