@@ -26,7 +26,8 @@ def main():
  menu[6]="Update this script"
  menu[7]="Exit"
  menu[9]="####################################"
- while(True):
+ while(in_loop):
+  in_loop=True
   clrdisp()
   for entry in menu:
    if(entry==0 or entry==9):
@@ -58,12 +59,24 @@ def server_status():
  socket.create_connection(server_address,30)
 
 def restart_server():
- yn=input("Are you sure you want to restart the server? (y/n): ")
+ in_loop=true
+ yn0=input("Are you sure you want to restart the server? (y/n): ")
  clrdisp()
- if(yn=='y'):
-  #Send restart command through socket
- elif(yn=='n'):
-  main()
+ if(yn0=='y'):
+  yn1=input("Would you like to enable a 10 minute countdown? (y/n): ")
+  while(in_loop):
+   in_loop=True
+   if(yn1=='y'):
+    #Send restart command with 10 minute countdown option through socket
+    in_loop=False
+   elif(yn1=='n'):
+    #Send restart command without 10 minute countdown option through socket
+    in_loop=False
+   else:
+    print("Please enter y or n")
+  return()
+ elif(yn0=='n'):
+  return()
  else:
   print("Please enter y or n")
   restart_server()
@@ -78,12 +91,13 @@ def stop_server():
  clrdisp()
  if(yn=='y'):
   #Send stop command through socket
+  return()
  elif(yn=='n'):
-  main()
+  return()
  else:
   print("Please enter y or n")
   stop_server()
-
+  return()
 def update_server():
  print("Code here")
 
