@@ -8,7 +8,7 @@ from time import sleep
 
 ######## Configuration ########
 server_ip = 'localhost' # Enter the IP of the server you are connecting to.
-server_port = 8888 # Enter the port of the server through which you are connecting to. If left empty, defaults to 8888.
+server_port = 1275 # Enter the port of the server through which you are connecting to. If left empty, defaults to 8888.
 
 ###############################
 
@@ -139,7 +139,6 @@ while(connected != True):
   connection,server_address = sock.accept()
   sock.send('Ping! Shut up and take my key!')
   recv = connection.recv(16)
-  print("tried to receive!")
   if(recv == 'Pong! Nice key! I have one just like it!'):
    connected = True
   else:
@@ -147,7 +146,7 @@ while(connected != True):
  except:
   tries += 1
  sleep(3)
- if(tries > 3):
+ if(tries > 5):
   print("Connection failed!")
   sleep(3)
   exit()
