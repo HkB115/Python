@@ -110,7 +110,6 @@ def userInput(msg):
 
 def server_status():
  print("Code here")
- socket.create_connection(server_address,30)
 
 def start_server():
  print("Code here")
