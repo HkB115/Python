@@ -3,15 +3,23 @@
 ver = '16.2.23.00' # DO NOT CHANGE THIS
 from os import name,system
 import socket
-from sys import version_info
+from sys import exit,version_info
 from time import sleep
 
 ######## Configuration ########
-server_address = 'localhost' # Enter the IP of the server you are connecting to.
-server_port = '' # Enter the port of the server through which you are connecting to. If left empty, defaults to 8888.
-
+server_ip = 'localhost' # Enter the IP of the server you are connecting to.
+server_port = 8888 # Enter the port of the server through which you are connecting to. If left empty, defaults to 8888.
 
 ###############################
+
+if(server_address == '' or server_address == 'localhost'):
+ server_address = '127.0.0.1'
+
+try int(server_port):
+ server_port = int(server_port)
+except:
+ print("Enter a valid integer for the server port!"
+ break
 
 def clrdisp():
  system('cls' if name == 'nt' else 'clear')
@@ -112,11 +120,31 @@ def update_script():
  print("Code here")
 
 python3 = version_info[0] > 2 # Python 3 check
-if(server_address == '' or server_address == 'localhost'):
- server_address = '127.0.0.1'
-if(server_port == ''):
- server_port = 8888
+server_address = (str(server_ip),int(server_port))
+print("Connecting to %s through port %s" %server_address)
 sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-sock.bind(str(server_address),int(server_port))
-sock.listen(1)
+try:
+ sock.bind(server_address)
+ sock.listen(1)
+except:
+ print("Connection failed!")
+ sleep(3)
+ break
+connecting = True
+tries = 0
+while(connecting):
+ sock.send('Ping!')
+ recv = connection.recv(16)
+ if(recv == 'Pong!'):
+  connected = False
+ else:
+  tries += 1
+ if(tries > 5):
+  print("Connection failed!")
+  sleep(3)
+  break
+print("Connected!")
+sleep(3)
 main()
+finally:
+ exit()
