@@ -19,7 +19,8 @@ try:
  server_port = int(server_port)
 except:
  print("Enter a valid integer for the server port!"
- break
+ sleep(3)
+ exit()
 
 def clrdisp():
  system('cls' if name == 'nt' else 'clear')
@@ -58,7 +59,7 @@ def main():
   elif(selection == '6'):
    update_script()
   elif(selection == '7'):
-   break
+   exit()
   else:
    print("Option not recognized!")
    sleep(3)
@@ -129,7 +130,7 @@ try:
 except:
  print("Connection failed!")
  sleep(3)
- break
+ exit()
 connecting = True
 tries = 0
 while(connecting):
@@ -143,7 +144,7 @@ while(connecting):
  if(tries > 3):
   print("Connection failed!")
   sleep(3)
-  break
+  exit()
 print("Connected!")
 sleep(3)
 main()
