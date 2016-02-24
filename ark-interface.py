@@ -128,24 +128,27 @@ try:
  sock.bind(server_address)
  sock.listen(1)
 except:
- print("Connection failed!")
  sleep(3)
  exit()
-connection,client_address = sock.accept()
-connecting = True
+connected = False
 tries = 0
-while(connecting):
+sock.settimeout(3)
+while(connected != True):
  try:
-  sock.send('Ping!')
-  recv = sock.recv(16)
-  if(recv == 'Pong!'):
-   connected = False
+  print("Listen here, you little shit!")
+  connection,server_address = sock.accept()
+  sock.send('Ping! Shut up and take my key!')
+  print("Send failedQ")
+  recv = connection.recv(16)
+  print("tried to receive!")
+  if(recv == 'Pong! Nice key! I have one just like it!'):
+   connected = True
   else:
    tries += 1
  except:
   tries += 1
- sleep(5)
- if(tries > 5):
+ sleep(3)
+ if(tries > 3):
   print("Connection failed!")
   sleep(3)
   exit()
