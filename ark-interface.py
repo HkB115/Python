@@ -7,8 +7,8 @@ from sys import exit,version_info
 from time import sleep
 
 ######## Configuration ########
-server_ip = 'connect.denverark.com' # Enter the IP of the server you are connecting to.
-server_port = 1275 # Enter the port of the server through which you are connecting to. If left empty, defaults to 8888.
+server_ip = 'localhost' # Enter the IP of the server you are connecting to.
+server_port = 8888 # Enter the port of the server through which you are connecting to. If left empty, defaults to 8888.
 
 ###############################
 
@@ -36,8 +36,7 @@ def main():
  menu[6] = "Update this script"
  menu[7] = "Exit"
  menu[9] = "####################################"
- while(in_loop):
-  in_loop = True
+ while(True):
   clrdisp()
   for entry in menu:
    if(entry == 0 or entry == 9):
@@ -59,6 +58,7 @@ def main():
   elif(selection == '6'):
    update_script()
   elif(selection == '7'):
+   sock.close()
    exit()
   else:
    print("Option not recognized!")
@@ -120,14 +120,13 @@ def update_server():
 def update_script():
  print("Code here")
 
-python3 = version_info[0] > 2 # Python 3 check
+python3 = version_info[0] > 2 # Check for Python3
 server_address = (str(server_ip),int(server_port))
 print("Connecting to %s through port %s" %server_address)
 sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 connected = False
 tries = 0
 while(connected != True):
- print("Listen here, you little shit!")
  try:
   sock.connect(server_address)
   connected = True
@@ -137,22 +136,18 @@ while(connected != True):
  if(tries > 5):
   print("Connection failed!")
   sleep(3)
-  exit()
-print("Verifying connection...")
+  break
 try:
- message = 'Pepper your angus'
- print('sending "%s"' % message)
- sock.sendall(message)
+ print("Verifying connection...")
+ sock.sendall("Ping!")
  amount_received = 0
- amount_expected = len(message)
- while amount_received < amount_expected:
-  data = sock.recv(16)
+ amount_expected = len("Ping!")
+ while(amount_received < amount_expected):
+  data = sock.recv(64)
   amount_received += len(data)
   print('received "%s"' % data)
-finally:
-    print('closing socket')
-    sock.close()
+except:
+ print("Connection terminated!")
 print("Connected!")
-sleep(3)
+sleep(2)
 main()
-exit()
