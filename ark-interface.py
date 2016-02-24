@@ -138,12 +138,14 @@ while(connecting):
  try:
   sock.send('Ping!')
   recv = sock.recv(16)
- if(recv == 'Pong!'):
-  connected = False
- else:
+  if(recv == 'Pong!'):
+   connected = False
+  else:
+   tries += 1
+ except:
   tries += 1
  sleep(5)
- if(tries > 3):
+ if(tries > 5):
   print("Connection failed!")
   sleep(3)
   exit()
