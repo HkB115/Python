@@ -148,5 +148,4 @@ while(connecting):
 print("Connected!")
 sleep(3)
 main()
-finally:
- exit()
+exit()
