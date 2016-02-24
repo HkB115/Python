@@ -7,7 +7,7 @@ from sys import version_info
 from time import sleep
 
 ######## Configuration ########
-server_address = '127.0.0.1' # Enter the IP of the server you are connecting to.
+server_address = ('127.0.0.1',1275) # Enter the IP of the server you are connecting to.
 server_port = '' # Enter the port of the server through which you are connecting to. If left empty, defaults to 8888.
 
 
@@ -110,8 +110,10 @@ def update_server():
 def update_script():
  print("Code here")
 
+python3 = version_info[0] > 2 # Python 3 check
 client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 if(server_port == ''):
  server_port = 8888
-python3 = version_info[0] > 2 # Python 3 check
+sock.bind(server_address)
+sock.listen(1)
 main()
