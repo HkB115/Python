@@ -7,7 +7,7 @@ from sys import exit,version_info
 from time import sleep
 
 ######## Configuration ########
-server_ip = 'localhost' # Enter the IP of the server you are connecting to.
+server_ip = 'connect.denverark.com' # Enter the IP of the server you are connecting to.
 server_port = 1275 # Enter the port of the server through which you are connecting to. If left empty, defaults to 8888.
 
 ###############################
@@ -124,32 +124,34 @@ python3 = version_info[0] > 2 # Python 3 check
 server_address = (str(server_ip),int(server_port))
 print("Connecting to %s through port %s" %server_address)
 sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-try:
- sock.bind(server_address)
- sock.listen(1)
-except:
- sleep(3)
- exit()
 connected = False
 tries = 0
-sock.settimeout(3)
 while(connected != True):
+ print("Listen here, you little shit!")
  try:
-  print("Listen here, you little shit!")
-  connection,server_address = sock.accept()
-  sock.send('Ping! Shut up and take my key!')
-  recv = connection.recv(16)
-  if(recv == 'Pong! Nice key! I have one just like it!'):
-   connected = True
-  else:
-   tries += 1
+  sock.connect(server_address)
+  connected = True
  except:
   tries += 1
- sleep(3)
+  sleep(3)
  if(tries > 5):
   print("Connection failed!")
   sleep(3)
   exit()
+print("Verifying connection...")
+try:
+ message = 'Pepper your angus'
+ print('sending "%s"' % message)
+ sock.sendall(message)
+ amount_received = 0
+ amount_expected = len(message)
+ while amount_received < amount_expected:
+  data = sock.recv(16)
+  amount_received += len(data)
+  print('received "%s"' % data)
+finally:
+    print('closing socket')
+    sock.close()
 print("Connected!")
 sleep(3)
 main()
