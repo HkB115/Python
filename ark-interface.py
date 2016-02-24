@@ -7,15 +7,23 @@ from sys import exit,version_info
 from time import sleep
 
 ######## Configuration ########
-server_ip = 'localhost' # Enter the IP of the server you are connecting to.
+server_ip = 'localhost' # Enter the IP of the server you are connecting to. If left empty, defaults to localhost.
 server_port = 8888 # Enter the port of the server through which you are connecting to. If left empty, defaults to 8888.
 
 ###############################
 
-if(server_ip == '' or server_ip == 'localhost'):
- server_ip = '127.0.0.1'
-
 try:
+ if(server_ip == '' or server_ip == 'localhost'):
+  server_ip = '127.0.0.1'
+ server_ip = str(server_ip)
+except:
+ print("Enter a valid IP or domain as a string for the server IP!")
+ sleep(3)
+ exit()
+ 
+try:
+ if(server_port == None):
+  server_port = 8888
  server_port = int(server_port)
 except:
  print("Enter a valid integer for the server port!")
@@ -123,7 +131,8 @@ def update_script():
 python3 = version_info[0] > 2 # Check for Python3
 server_address = (str(server_ip),int(server_port))
 print("Connecting to %s through port %s" %server_address)
-sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+#sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+sock = socket.create_connection((server_ip,server_port))
 connected = False
 tries = 0
 while(connected != True):
@@ -139,9 +148,10 @@ while(connected != True):
   break
 try:
  print("Verifying connection...")
- sock.sendall("Ping!")
+ send = "Ping!"
+ sock.sendall(send)
  amount_received = 0
- amount_expected = len("Ping!")
+ amount_expected = len(send)
  while(amount_received < amount_expected):
   data = sock.recv(64)
   amount_received += len(data)
