@@ -97,7 +97,6 @@ def stop_server():
  else:
   print("Please enter y or n")
   stop_server()
-  return()
 def update_server():
  print("Code here")
 
