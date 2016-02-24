@@ -3,6 +3,7 @@
 ver = '16.2.23.00' # DO NOT CHANGE THIS
 from os import name,system
 import socket
+from sys import version_info
 from time import sleep
 
 ######## Configuration ########
@@ -34,7 +35,7 @@ def main():
     print(str(menu[entry]))
    else:
     print("#",str(entry),menu[entry])
-  selection = input("Select an option: ")
+  selection = userInput("Select an option: ")
   clrdisp()
   if(selection == '1'):
    server_status()
@@ -53,6 +54,12 @@ def main():
   else:
    print("Option not recognized!")
    sleep(3)
+   
+def userInput(msg):
+ if(python3):
+  return input(msg)
+ else:
+  return raw_input(msg)
 
 def server_status():
  print("Code here")
@@ -60,10 +67,10 @@ def server_status():
 
 def restart_server():
  in_loop = true
- yn0 = input("Are you sure you want to restart the server? (y/n): ")
+ yn0 = userInput("Are you sure you want to restart the server? (y/n): ")
  clrdisp()
  if(yn0 == 'y'):
-  yn1 = input("Would you like to enable a 10 minute countdown? (y/n): ")
+  yn1 = userInput("Would you like to enable a 10 minute countdown? (y/n): ")
   while(in_loop):
    in_loop = True
    if(yn1 == 'y'):
@@ -87,12 +94,12 @@ def start_server():
  print("Code here")
 
 def stop_server():
- yn = input("Are you sure you want to restart the server? (y/n): ")
+ yn0 = userInput("Are you sure you want to restart the server? (y/n): ")
  clrdisp()
- if(yn == 'y'):
+ if(yn0 == 'y'):
   #Send stop command through socket
   return()
- elif(yn == 'n'):
+ elif(yn0 == 'n'):
   return()
  else:
   print("Please enter y or n")
@@ -106,5 +113,5 @@ def update_script():
 client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 if(server_port == ''):
  server_port = 8888
-yn='null'
+python3 = version_info[0] > 2 # Python 3 check
 main()
