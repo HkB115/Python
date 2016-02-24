@@ -18,7 +18,7 @@ if(server_address == '' or server_address == 'localhost'):
 try:
  server_port = int(server_port)
 except:
- print("Enter a valid integer for the server port!"
+ print("Enter a valid integer for the server port!")
  sleep(3)
  exit()
 
