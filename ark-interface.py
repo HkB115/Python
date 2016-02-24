@@ -122,28 +122,27 @@ def update_script():
  print("Code here")
 
 python3 = version_info[0] > 2 # Check for Python3
-server_address = (str(server_ip),int(server_port))
-print("Connecting to %s through port %s" %server_address)
-#sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 try:
- sock = socket.create_connection((server_ip,server_port))
+ print("Connecting to %s through port %s" %server_address)
+ server_address = (str(server_ip),int(server_port))
+ sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 except:
- print("Failed to create a connection with the server!")
+ print("Failed to create a connection with the server")
  sleep(3)
  exit()
 connected = False
 tries = 0
 while(connected != True):
  try:
-  sock.connect(server_address)
+  sock.create_connection((server_ip,server_port))
   connected = True
  except:
   tries += 1
   sleep(3)
  if(tries > 5):
-  print("Connection failed!")
+  print("Connection timed out")
   sleep(3)
-  break
+  exit()
 try:
  print("Verifying connection...")
  send = "Ping!"
@@ -155,7 +154,9 @@ try:
   amount_received += len(data)
   print('received "%s"' % data)
 except:
- print("Connection terminated!")
+ print("Connection could not be verified")
+ sleep(3)
+ exit()
 print("Connected!")
 sleep(2)
 try:
