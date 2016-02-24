@@ -139,7 +139,8 @@ while(connecting):
   connected = False
  else:
   tries += 1
- if(tries > 5):
+ sleep(5)
+ if(tries > 3):
   print("Connection failed!")
   sleep(3)
   break
