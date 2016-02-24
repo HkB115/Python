@@ -111,9 +111,9 @@ def update_script():
  print("Code here")
 
 python3 = version_info[0] > 2 # Python 3 check
-client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 if(server_port == ''):
  server_port = 8888
+sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 sock.bind(server_address)
 sock.listen(1)
 main()
