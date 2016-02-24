@@ -15,7 +15,7 @@ server_port = 8888 # Enter the port of the server through which you are connecti
 if(server_address == '' or server_address == 'localhost'):
  server_address = '127.0.0.1'
 
-try int(server_port):
+try:
  server_port = int(server_port)
 except:
  print("Enter a valid integer for the server port!"
