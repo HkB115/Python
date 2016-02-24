@@ -1,6 +1,6 @@
 #!/usr/bin/python
 ## Created by HkB115
-ver = '02.23.16' # DO NOT CHANGE THIS
+ver = '16.2.23.00' # DO NOT CHANGE THIS
 from os import name,system
 import socket
 from time import sleep
