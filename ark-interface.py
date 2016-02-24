@@ -1,6 +1,6 @@
 #!/usr/bin/python
 ## Created by HkB115
-ver='0.0.1' # DO NOT CHANGE THIS
+ver='02.23.16' # DO NOT CHANGE THIS
 from os import name,system
 import socket
 from time import sleep
@@ -11,9 +11,6 @@ server_port='' # Enter the port of the server through which you are connecting t
 
 
 ###############################
-client_socket=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-if(server_port==''):
- server_port=8888
 
 def clrdisp():
  system('cls' if name=='nt' else 'clear')
@@ -61,13 +58,31 @@ def server_status():
  socket.create_connection(server_address,30)
 
 def restart_server():
+ yn=input("Are you sure you want to restart the server? (y/n): ")
+ clrdisp()
+ if(yn=='y'):
+  #Send restart command through socket
+ elif(yn=='n'):
+  main()
+ else:
+  print("Please enter y or n")
+  restart_server()
+ 
  print("Code here")
 
 def start_server():
  print("Code here")
 
 def stop_server():
- print("Code here")
+ yn=input("Are you sure you want to restart the server? (y/n): ")
+ clrdisp()
+ if(yn=='y'):
+  #Send stop command through socket
+ elif(yn=='n'):
+  main()
+ else:
+  print("Please enter y or n")
+  stop_server()
 
 def update_server():
  print("Code here")
@@ -75,6 +90,8 @@ def update_server():
 def update_script():
  print("Code here")
 
-
-
+client_socket=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+if(server_port==''):
+ server_port=8888
+yn='null'
 main()
