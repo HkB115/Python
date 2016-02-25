@@ -44,12 +44,8 @@ elif(char_set == 'digits'):
  char_set = '1234567890'
 else:
  char_set = str(char_set)
-if(min_digits < 1):
- min_digits = 0
-if(min_lower < 1):
- min_lower = 0
-if(min_upper < 1):
- min_upper = 0
+if(min_length < 1):
+ min_length = 0
 
 def main():
  found = False
@@ -67,7 +63,7 @@ def main():
     print("Key not found. Starting over...")
     sleep(delay)
    else:
-    filename = str(url + '.txt')
+    filename = str(rand_set + '.txt')
     print("Ahoy, Cap'n! We found some booty at %s! Saving content to %s" % (url, filename))
     fp = open(filename, 'a')
     fp.write(content)
