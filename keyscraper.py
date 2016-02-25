@@ -21,7 +21,7 @@ base_url = 'http://www.google.com/' # Base url for the site.
 # 'alphabetic.all' includes all lowercase letters and all uppercase letters
 # 'digits' for all digits.
 char_set = 'alphanumeric.all' # The character set you wish to use.
-delay = 2 # Delay between retries in seconds. Helps prevent IP blocking.
+delay = 1 # Delay between retries in seconds. Helps prevent IP blocking.
 max_length = 8 # Maximum length of characters after the base url.
 min_length = 4 # Minimum length of characters after the base url.
 key = 'test' # The key you are looking for. You may use regex here.
