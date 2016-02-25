@@ -8,11 +8,11 @@ from time import sleep,time
 import urllib2
 
 ######## Configuration ########
-base_url = 'http://pastebin.com/' # Base url for the site.
+base_url = 'http://google.com/' # Base url for the site.
 #just_ascii = True # Disable to use all characters.
 max_length = 8 # Maximum length of characters after the base url.
 min_length = 2 # Minimum length of characters after the base url.
-string_to_find = 'fart' # The key you are looking for. You may use regex here.
+string_to_find = 'test' # The key you are looking for. You may use regex here.
 ###############################
 
 ######## Advanced Configuration ########
