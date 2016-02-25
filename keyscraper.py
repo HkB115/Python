@@ -46,6 +46,10 @@ else:
  char_set = str(char_set)
 if(min_length < 1):
  min_length = 0
+if(min_length > max_length):
+ print("Max length must be larger than min length!")
+ sleep(3)
+ exit()
 
 def main():
  found = False
