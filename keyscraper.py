@@ -10,7 +10,7 @@ except:
  import urllib
 
 ######## Configuration ########
-ask = True # Ask to try again after each successful find. Setting to default makes it repeat automatically.
+ask_repeat = True # Ask to try again after each successful find. Setting to default makes it repeat automatically.
 base_url = 'http://www.google.com/' # Base url for the site.
 # The character set you wish to use. You may use one of the options or give your own.
 # 'alphanumeric.lower' includes all lowercase letters and all digits.
@@ -21,7 +21,7 @@ base_url = 'http://www.google.com/' # Base url for the site.
 # 'alphabetic.all' includes all lowercase letters and all uppercase letters
 # 'digits' for all digits.
 char_set = 'alphanumeric.all' # The character set you wish to use.
-delay = 3 # Delay between cycles. Helps prevent IP blocking.
+delay = 2 # Delay between retries in seconds. Helps prevent IP blocking.
 max_length = 8 # Maximum length of characters after the base url.
 min_length = 4 # Minimum length of characters after the base url.
 key = 'test' # The key you are looking for. You may use regex here.
@@ -84,6 +84,7 @@ def user_input(msg):
 try_again = True
 while(try_again):
  main()
+ ask = ask_repeat
  while(ask):
   yn = user_input("Would you like to try again? (y/n): ")
   if(yn == 'y'):
