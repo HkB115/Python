@@ -8,7 +8,8 @@ from time import sleep,time
 import urllib2
 
 ######## Configuration ########
-base_url = 'http://google.com/' # Base url for the site.
+base_url = 'http://www.google.com/' # Base url for the site.
+delay = 5 # Delay between cycles. Helps prevent IP blocking.
 #just_ascii = True # Disable to use all characters.
 max_length = 8 # Maximum length of characters after the base url.
 min_length = 2 # Minimum length of characters after the base url.
@@ -55,7 +56,7 @@ while(not_found):
  try:
   content = urllib2.urlopen(url).read()
   url_valid = True
-  print("%s found. Searching..." % url)
+  print("Valid URL found at %s. Searching for key..." % url)
   matches = re.findall(string_to_find, content)
   if(len(matches) == 0):
    print("Key not found. Starting over...")
@@ -66,4 +67,4 @@ while(not_found):
    not_found = False
  except:
   print("%s returned 404. Starting over..." % url)
-  sleep(3) # To prevent IP blocking :/
+  sleep(delay)
