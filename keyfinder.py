@@ -9,10 +9,10 @@ import urllib2
 
 ######## Configuration ########
 base_url = 'http://www.google.com/' # Base url for the site.
-delay = 5 # Delay between cycles. Helps prevent IP blocking.
+delay = 1 # Delay between cycles. Helps prevent IP blocking.
 #just_ascii = True # Disable to use all characters.
 max_length = 8 # Maximum length of characters after the base url.
-min_length = 2 # Minimum length of characters after the base url.
+min_length = 4 # Minimum length of characters after the base url.
 string_to_find = 'test' # The key you are looking for. You may use regex here.
 ###############################
 
@@ -46,25 +46,35 @@ def rand_string(length, digits, lower, upper):
     )
  return "".join(sample(a_string, len(a_string)))
 
-not_found = True
-while(not_found):
- rand_length = randint(min_length, max_length)
- after_url = rand_string(length = rand_length, digits = min_digits, lower = min_lower, upper = min_upper)
- url = str(base_url + after_url)
- print("######## NEW SEARCH ######")
- print("Trying %s" % url)
- try:
-  content = urllib2.urlopen(url).read()
-  url_valid = True
-  print("Valid URL found at %s. Searching for key..." % url)
-  matches = re.findall(string_to_find, content)
-  if(len(matches) == 0):
-   print("Key not found. Starting over...")
-   sleep(1)
-  else:
-   print("Ahoy, Cap'n! We found some booty at %s" % url)
-   sleep(3)
-   not_found = False
- except:
-  print("%s returned 404. Starting over..." % url)
-  sleep(delay)
+def main():
+ not_found = True
+ while(not_found):
+  rand_length = randint(min_length, max_length)
+  after_url = rand_string(length = rand_length, digits = min_digits, lower = min_lower, upper = min_upper)
+  url = str(base_url + after_url)
+  print("######## NEW SEARCH ######")
+  print("Trying %s" % url)
+  try:
+   content = urllib2.urlopen(url).read()
+   url_valid = True
+   print("Valid URL found at %s. Searching for key..." % url)
+   matches = re.findall(string_to_find, content)
+   if(len(matches) == 0):
+    print("Key not found. Starting over...")
+    sleep(1)
+   else:
+    print("Ahoy, Cap'n! We found some booty at %s" % url)
+    sleep(3)
+    not_found = False
+  except:
+   print("%s returned 404. Starting over..." % url)
+   sleep(delay)
+
+try_again = True
+while(try_again):
+ main()
+ yn = str(raw_input("Would you like to try again? (y/n): "))
+ if(yn == 'y'):
+  try_again = True
+ elif(yn == 'n'):
+  try_again = False
