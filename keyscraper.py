@@ -1,27 +1,49 @@
 #/usr/bin/python
 #Made by HkB115. Feel free to use, modify, or distribute.
-from itertools import chain
-from random import choice, randint, sample, seed
+from random import randint, sample
 import re
 import string
-from time import sleep,time
-import urllib2
+from sys import exit, version_info
+from time import sleep
+try:
+ import urllib2 as urllib
+except:
+ import urllib
 
 ######## Configuration ########
 base_url = 'http://www.google.com/' # Base url for the site.
+# The character set you wish to use. You may use one of the options or give your own.
+# 'alphanumeric.lower' includes all lowercase letters and all digits.
+# 'alphanumeric.upper' includes all uppercase letters and all digits.
+# 'alphanumeric.all' includes all uppercase letters, all lowercase letters, and all digits.
+# 'alphabetic.lower' includes all lowercase letters.
+# 'alphabetic.upper' includes all uppercase letters.
+# 'alphabetic.all' includes all lowercase letters and all uppercase letters
+# 'digits' for all digits.
+char_set = 'alphanumeric.all' # The character set you wish to use.
 delay = 1 # Delay between cycles. Helps prevent IP blocking.
-#just_ascii = True # Disable to use all characters.
 max_length = 8 # Maximum length of characters after the base url.
 min_length = 4 # Minimum length of characters after the base url.
-string_to_find = 'test' # The key you are looking for. You may use regex here.
+key = 'test' # The key you are looking for. You may use regex here.
 ###############################
 
-######## Advanced Configuration ########
-min_digits = 0 # Minimum number of digits after the base url.
-min_lower = 0 # Minimum number of lower case characters after the base url.
-min_upper = 0 # Minimum number of upper case characters after the base url.
-########################################
-
+python3 = version_info[0] > 2 # Checks for Python 3 environment.
+if(char_set == 'alphanumeric.all'):
+ char_set = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+elif(char_set == 'alphanumeric.lower'):
+ char_set = 'abcdefghijklmnopqrstuvwxyz1234567890'
+elif(char_set == 'alphanumeric.upper'):
+ char_set = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'
+elif(char_set == 'alphabetic.all'):
+ char_set = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+elif(char_set == 'alphabetic.lower'):
+ char_set = 'abcdefghijklmnopqrstuvwxyz'
+elif(char_set == 'alphabetic.upper'):
+ char_set = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+elif(char_set == 'digits'):
+ char_set = '1234567890'
+else:
+ char_set = str(char_set)
 if(min_digits < 1):
  min_digits = 0
 if(min_lower < 1):
@@ -29,52 +51,53 @@ if(min_lower < 1):
 if(min_upper < 1):
  min_upper = 0
 
-def rand_string(length, digits, lower, upper):
- seed(time())
- #lowercase = string.lowercase.translate(None, "o")
- #uppercase = string.uppercase.translate(None, "O")
- lowercase = string.ascii_lowercase
- uppercase = string.ascii_uppercase
- letters = "{0:s}{1:s}".format(lowercase, uppercase)
- a_string = list(
-  chain(
-   (choice(uppercase) for _ in range(upper)),
-   (choice(lowercase) for _ in range(lower)),
-   (choice(string.digits) for _ in range(digits)),
-   (choice(letters) for _ in range((length - digits - upper - lower)))
-        )
-    )
- return "".join(sample(a_string, len(a_string)))
-
 def main():
- not_found = True
- while(not_found):
-  rand_length = randint(min_length, max_length)
-  after_url = rand_string(length = rand_length, digits = min_digits, lower = min_lower, upper = min_upper)
-  url = str(base_url + after_url)
-  print("######## NEW SEARCH ######")
+ found = False
+ while(found != True):
+  length = randint(min_length, max_length)
+  rand_set = ''.join(sample(char_set, length))
+  url = str(base_url + rand_set)
+  print("######## NEW SEARCH ########")
   print("Trying %s" % url)
   try:
-   content = urllib2.urlopen(url).read()
-   url_valid = True
-   print("Valid URL found at %s. Searching for key..." % url)
-   matches = re.findall(string_to_find, content)
+   content = urllib.urlopen(url).read()
+   print("Valid URL found. Searching for key...")
+   matches = re.findall(key, content)
    if(len(matches) == 0):
     print("Key not found. Starting over...")
-    sleep(1)
+    sleep(delay)
    else:
-    print("Ahoy, Cap'n! We found some booty at %s" % url)
-    sleep(3)
-    not_found = False
+    filename = str(url + '.txt')
+    print("Ahoy, Cap'n! We found some booty at %s! Saving content to %s" % (url, filename))
+    fp = open(filename, 'a')
+    fp.write(content)
+    fp.close()
+    sleep(delay)
+    found = True
   except:
    print("%s returned 404. Starting over..." % url)
    sleep(delay)
+ return
+
+def user_input(msg): 
+ if(python3):
+  return input(msg) # Uses the input function if a Python 3 environment is being used.
+ else:
+  return raw_input(msg) # Uses the raw_input function if a Python environment less than 3 is being used.
 
 try_again = True
 while(try_again):
  main()
- yn = str(raw_input("Would you like to try again? (y/n): "))
- if(yn == 'y'):
-  try_again = True
- elif(yn == 'n'):
-  try_again = False
+ repeat = True
+ while(repeat):
+  yn = user_input("Would you like to try again? (y/n): ")
+  if(yn == 'y'):
+   repeat = False
+   try_again = True
+  elif(yn == 'n'):
+   repeat = False
+   try_again = False
+  else:
+   print("Please enter y or n")
+   repeat = True
+   try_again = True
