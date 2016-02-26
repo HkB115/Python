@@ -46,8 +46,8 @@ else:
  char_set = str(char_set)
 if(min_length < 1):
  min_length = 0
-if(min_length > max_length):
- print("Max length must be larger than min length!")
+if(max_length < min_length):
+ print("[ERROR] Max length must be larger than min length!")
  sleep(3)
  exit()
 
@@ -57,24 +57,26 @@ def main():
   length = randint(min_length, max_length)
   rand_set = ''.join(sample(char_set, length))
   url = str(base_url + rand_set)
-  print("######## NEW SEARCH ########")
+  print("\n############ NEW SEARCH ############")
   sleep(delay)
-  print("Validating %s..." % url)
+  print("# [....] Validating %s..." % url)
   try:
    content = urllib.urlopen(url).read()
-   print("Valid URL found. Searching for key...")
+   print("# [ OK ] Valid URL found. Searching for key...")
    matches = re.findall(key, content)
    if(len(matches) == 0):
-    print("Key not found. Starting over...")
+    print("# [FAIL] Key not found. Starting over...")
    else:
-    filename = str('\'' + base_url + rand_set + '\'.txt')
-    print("[!] Key match found at %s! Saving content to %s" % (url, filename))
+    filename = str(rand_set + '.txt')
+    print("# [ ! ] Key match found! Saving content to %s" % (filename))
     fp = open(filename, 'a')
     fp.write(content)
     fp.close()
     found = True
+    print("####################################")
   except:
-   print("%s returned 404. Starting over..." % url)
+   print("# [ERROR] URL could not be reached. Starting over...")
+   print("####################################")
  return
 
 def user_input(msg): 
