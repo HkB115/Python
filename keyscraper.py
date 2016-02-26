@@ -10,7 +10,7 @@ except:
  import urllib
 
 ######## Configuration ########
-ask_repeat = True # Ask to try again after each successful find. Setting to default makes it repeat automatically.
+ask_repeat = False # Ask to try again after each successful find. Setting to default makes it repeat automatically.
 base_url = 'http://www.google.com/*' # URL of the site you will be scraping. Use a * to denote where the URL will change.
 # The character set you wish to use. You may use one of the options or give your own.
 # 'alphanumeric.lower' includes all lowercase letters and all digits.
