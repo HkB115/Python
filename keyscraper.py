@@ -1,4 +1,4 @@
-#/usr/bin/python
+#/usr/bin/env python
 #Made by HkB115. Feel free to use, modify, or distribute.
 from random import randint, sample
 import re
@@ -10,7 +10,7 @@ except:
  import urllib
 
 ######## Configuration ########
-ask_repeat = True # Ask to try again after each successful find. Setting to default makes it repeat automatically.
+ask_repeat = False # Ask to try again after each successful find. Setting to default makes it repeat automatically.
 base_url = 'http://www.google.com/' # Base url for the site.
 # The character set you wish to use. You may use one of the options or give your own.
 # 'alphanumeric.lower' includes all lowercase letters and all digits.
@@ -20,11 +20,11 @@ base_url = 'http://www.google.com/' # Base url for the site.
 # 'alphabetic.upper' includes all uppercase letters.
 # 'alphabetic.all' includes all lowercase letters and all uppercase letters
 # 'digits' for all digits.
-char_set = 'alphanumeric.all' # The character set you wish to use.
+char_set = 'alphanumeric.all' # Use one of the strings provided above or make your own set.
 delay = 2 # Delay between retries in seconds. Helps prevent IP blocking.
 max_length = 8 # Maximum length of characters after the base url.
 min_length = 4 # Minimum length of characters after the base url.
-key = 'test' # The key you are looking for. You may use regex here.
+key = '(key)|(test)' # The key you are looking for. You may use regex here.
 ###############################
 
 python3 = version_info[0] > 2 # Checks for Python 3 environment.
@@ -58,25 +58,23 @@ def main():
   rand_set = ''.join(sample(char_set, length))
   url = str(base_url + rand_set)
   print("######## NEW SEARCH ########")
-  print("Trying %s" % url)
+  sleep(delay)
+  print("Validating %s..." % url)
   try:
    content = urllib.urlopen(url).read()
    print("Valid URL found. Searching for key...")
    matches = re.findall(key, content)
    if(len(matches) == 0):
     print("Key not found. Starting over...")
-    sleep(2)
    else:
-    filename = str(rand_set + '.txt')
-    print("Ahoy, Cap'n! We found some booty at %s! Saving content to %s" % (url, filename))
+    filename = str('\'' + base_url + rand_set + '\'.txt')
+    print("[!] Key match found at %s! Saving content to %s" % (url, filename))
     fp = open(filename, 'a')
     fp.write(content)
     fp.close()
-    sleep(2)
     found = True
   except:
    print("%s returned 404. Starting over..." % url)
-   sleep(delay)
  return
 
 def user_input(msg): 
