@@ -25,7 +25,7 @@ char_set = 'alphanumeric.all' # Use one of the strings provided above or make yo
 delay = 2 # Delay between retries in seconds. 2 is usually enough to prevent any kind of IP blocking bot.
 max_length = 8 # Maximum length of characters after the base url.
 min_length = 4 # Minimum length of characters after the base url.
-key = '(key)|(pass)|(user)' # The key you are looking for. You may use regex here.
+key = '(key)|(test)' # The key you are looking for. You may use regex here.
 ###############################
 
 python3 = version_info[0] > 2 # Checks for Python 3 environment.
@@ -51,6 +51,8 @@ if(max_length < min_length):
  print("[FAIL] Max length must be larger than min length!")
  sleep(3)
  exit()
+hits = 0
+matches = 0
 
 def main():
  found = False
@@ -59,13 +61,12 @@ def main():
   rand_set = ''.join(sample(char_set, length))
   url = base_url.replace('*', rand_set)
   print("\n############ NEW SEARCH ############")
-  sleep(delay)
   print("# [....] Validating %s" % url)
   try:
    content = urllib.urlopen(url).read()
    print("# [ OK ] Valid URL found. Searching for key...")
-   matches = re.findall(key, content)
-   if(len(matches) == 0):
+   match = re.findall(key, content)
+   if(len(match) == 0):
     print("# [FAIL] Key not found. Starting over...")
    else:
     filename = str(rand_set + '.txt')
@@ -74,10 +75,11 @@ def main():
     fp.write(content)
     fp.close()
     found = True
-    print("####################################")
   except:
    print("# [FAIL] URL could not be reached. Starting over...")
-   print("####################################")
+  print("####################################")
+  print("Valid URLs found: %d   Key matches found: %d" % (hits, matches))
+  sleep(delay)
  return
 
 def user_input(msg): 
