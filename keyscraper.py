@@ -65,14 +65,14 @@ def main():
    matches = re.findall(key, content)
    if(len(matches) == 0):
     print("Key not found. Starting over...")
-    sleep(delay)
+    sleep(2)
    else:
     filename = str(rand_set + '.txt')
     print("Ahoy, Cap'n! We found some booty at %s! Saving content to %s" % (url, filename))
     fp = open(filename, 'a')
     fp.write(content)
     fp.close()
-    sleep(delay)
+    sleep(2)
     found = True
   except:
    print("%s returned 404. Starting over..." % url)
