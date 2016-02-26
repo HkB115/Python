@@ -22,7 +22,7 @@ base_url = 'http://www.google.com/*' # URL of the site you will be scraping. Use
 # 'alphabetic.all' includes all lowercase letters and all uppercase letters
 # 'digits' for all digits.
 char_set = 'alphanumeric.all' # Use one of the strings provided above or make your own set.
-delay = 2 # Delay between retries in seconds. Helps prevent IP blocking.
+delay = 2 # Delay between retries in seconds. 2 is usually enough to prevent any kind of IP blocking bot.
 max_length = 8 # Maximum length of characters after the base url.
 min_length = 4 # Minimum length of characters after the base url.
 key = '(key)|(pass)|(user)' # The key you are looking for. You may use regex here.
