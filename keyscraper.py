@@ -10,7 +10,7 @@ except:
  import urllib
 
 ######## Configuration ########
-ask_repeat = False # Ask to try again after each successful find. Setting to default makes it repeat automatically.
+ask_repeat = True # Ask to try again after each successful find. Setting to default makes it repeat automatically.
 base_url = 'http://www.google.com/*' # URL of the site you will be scraping. Use a * to denote where the URL will change.
 # The character set you wish to use. You may use one of the options or give your own.
 # 'alphanumeric.lower' includes all lowercase letters and all digits.
@@ -28,8 +28,8 @@ key = 'key|test' # The key you are looking for. You may use regex here.
 ###############################
 
 def main():
- hits = 0
- matches = 0
+ global hits
+ global matches
  repeat = True
  while(repeat):
   global hits
@@ -105,4 +105,6 @@ if(max_length < min_length):
  print("[FAIL] Max length must be larger than min length!")
  sleep(3)
  exit()
+hits = 0
+matches = 0
 main()
