@@ -2,7 +2,6 @@
 #Made by HkB115. Feel free to use, modify, or distribute.
 from random import randint, sample
 import re
-#from string import replace
 from sys import exit, version_info
 from time import sleep
 try:
@@ -25,8 +24,63 @@ char_set = 'alphanumeric.all' # Use one of the strings provided above or make yo
 delay = 2 # Delay between retries in seconds. 2 is usually enough to prevent any kind of IP blocking bot.
 max_length = 8 # Maximum length of characters after the base url.
 min_length = 4 # Minimum length of characters after the base url.
-key = '(key)|(test)' # The key you are looking for. You may use regex here.
+key = 'key|test' # The key you are looking for. You may use regex here.
 ###############################
+
+def main():
+ hits = 0
+ matches = 0
+ repeat = True
+ while(repeat):
+  global hits
+  global matches
+  found = False
+  while(found != True):
+   length = randint(min_length, max_length)
+   rand_set = ''.join(sample(char_set, length))
+   url = base_url.replace('*', rand_set)
+   print("\n################ NEW SEARCH ################")
+   print("# [....] Validating %s" % url)
+   try:
+    content = urllib.urlopen(url).read()
+    print("# [ OK ] Valid URL found. Searching for key...")
+    hits += 1
+    match = re.findall(key, content)
+    if(len(match) == 0):
+     print("# [FAIL] Key not found. Starting over...")
+    else:
+     filename = str(rand_set + '.txt')
+     print("# [ OK ] Key match found! Saving content to %s" % (filename))
+     matches += 1
+     fp = open(filename, 'a')
+     fp.write(content)
+     fp.close()
+     found = True
+   except:
+    print("# [FAIL] URL could not be reached. Starting over...")
+   print("############################################")
+   print("Valid URLs found: %d   Key matches found: %d" % (hits, matches))
+   sleep(delay)
+  ask = ask_repeat
+  while(ask):
+   yn = user_input("Would you like to try again? (y/n): ")
+   if(yn == 'y'):
+    ask = False
+    repeat = True
+   elif(yn == 'n'):
+    ask = False
+    repeat = False
+   else:
+    print("Please enter y or n")
+    ask = True
+    repeat = True 
+ return
+
+def user_input(msg): 
+ if(python3):
+  return input(msg) # Uses the input function if a Python 3 environment is being used.
+ else:
+  return raw_input(msg) # Uses the raw_input function if a Python environment less than 3 is being used.
 
 python3 = version_info[0] > 2 # Checks for Python 3 environment.
 if(char_set == 'alphanumeric.all'):
@@ -51,56 +105,4 @@ if(max_length < min_length):
  print("[FAIL] Max length must be larger than min length!")
  sleep(3)
  exit()
-hits = 0
-matches = 0
-
-def main():
- found = False
- while(found != True):
-  length = randint(min_length, max_length)
-  rand_set = ''.join(sample(char_set, length))
-  url = base_url.replace('*', rand_set)
-  print("\n############ NEW SEARCH ############")
-  print("# [....] Validating %s" % url)
-  try:
-   content = urllib.urlopen(url).read()
-   print("# [ OK ] Valid URL found. Searching for key...")
-   match = re.findall(key, content)
-   if(len(match) == 0):
-    print("# [FAIL] Key not found. Starting over...")
-   else:
-    filename = str(rand_set + '.txt')
-    print("# [ OK ] Key match found! Saving content to %s" % (filename))
-    fp = open(filename, 'a')
-    fp.write(content)
-    fp.close()
-    found = True
-  except:
-   print("# [FAIL] URL could not be reached. Starting over...")
-  print("####################################")
-  print("Valid URLs found: %d   Key matches found: %d" % (hits, matches))
-  sleep(delay)
- return
-
-def user_input(msg): 
- if(python3):
-  return input(msg) # Uses the input function if a Python 3 environment is being used.
- else:
-  return raw_input(msg) # Uses the raw_input function if a Python environment less than 3 is being used.
-
-try_again = True
-while(try_again):
- main()
- ask = ask_repeat
- while(ask):
-  yn = user_input("Would you like to try again? (y/n): ")
-  if(yn == 'y'):
-   ask = False
-   try_again = True
-  elif(yn == 'n'):
-   ask = False
-   try_again = False
-  else:
-   print("Please enter y or n")
-   ask = True
-   try_again = True
+main()
