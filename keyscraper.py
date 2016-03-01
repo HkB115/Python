@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 #Made by HkB115. Feel free to use, modify, or distribute.
 from random import randint, sample
 import re
